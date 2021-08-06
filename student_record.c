@@ -16,6 +16,8 @@ void search_score();
 void delete_score();
 void modify_score();
 void top_student();
+void average_score();
+void grade_student();
 void display_score();
 
 int main()
@@ -46,6 +48,10 @@ int main()
         }else if(choice == 5){
             top_student();
         }else if(choice == 6){
+            average_score();
+        }else if(choice == 7){
+            grade_student();
+        }else if(choice == 8){
             display_score(first);
         }else{
             exit(0);
@@ -61,8 +67,10 @@ void choice_list()
     printf("3. Delete the score of student.\n");
     printf("4. Modify the score of student.\n");
     printf("5. Find the top student.\n");
-    printf("6. Display all the scores that are saved.\n");
-    printf("7. Exit the program.\n");
+    printf("6. Find the average score.\n");
+    printf("7. Calculate student's grade.\n");
+    printf("8. Display all the scores that are saved.\n");
+    printf("9. Exit the program.\n");
 }
 
 void insert_score()
@@ -211,6 +219,45 @@ void top_student()
         p=p->next;
     }
     printf("\nThe top student is %s with %d score.\n\n",q->name,m);
+}
+
+void average_score()
+{
+    int sum = 0;
+    float avg;
+    int count=0;
+    struct Node *p;
+    p = first;
+    while(p){
+        sum += p->score;
+        count++;
+        p=p->next;
+    }
+    avg = sum/count;
+    printf("The average score is : %.2f",avg);
+}
+
+void grade_student()
+{
+    struct Node *p;
+    p = first;
+    printf("\n\t***Grade***\n\n");
+    while(p != NULL){
+        if(p->score <= 100 && p->score >=90){
+            printf("The student name %s is Grade A with %d score.\n",p->name,p->score);
+        }else if(p->score <= 89 && p->score >=80){
+            printf("The student name %s is Grade B with %d score.\n",p->name,p->score);
+        }else if(p->score <= 79 && p->score >=70){
+            printf("The student name %s is Grade C with %d score.\n",p->name,p->score);
+        }else if(p->score <= 69 && p->score >=60){
+            printf("The student name %s is Grade D with %d score.\n",p->name,p->score);
+        }else if(p->score <= 59 && p->score >=50){
+            printf("The student name %s is Grade E with %d score.\n",p->name,p->score);
+        }else{
+            printf("The student name %s is Grade F with %d score.\n",p->name,p->score);
+        }
+        p=p->next;
+    }
 }
 
 void display_score(struct Node *p)
