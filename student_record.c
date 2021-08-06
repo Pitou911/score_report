@@ -32,7 +32,7 @@ int main()
 
     while(1){
         choice_list();
-        printf("What do you want to do?:");
+        printf("\nWhat do you want to do?:");
         scanf("%d",&choice);
 
         if(choice == 1){
@@ -86,11 +86,20 @@ void insert_score()
             p=p->next;
         }
     }
+
     printf("Enter the name: ");
     scanf("%20s", temp->name);
     printf("Enter the mark: ");
     scanf("%d",&temp->score);
-    
+    if(temp->score > 100){
+        printf("\n\t!!!The score can't be more than 100!!!\n");
+        printf("Please enter the mark again: ");
+        scanf("%d",&temp->score);
+    }else if(temp->score < 0){
+        printf("\n\t!!!The score can't be less than 0!!!\n");
+        printf("Please enter the mark again: ");
+        scanf("%d",&temp->score);
+    }
     temp->next = NULL;
     last->next = temp;
     last = temp;
@@ -169,6 +178,11 @@ void modify_score()
         if(strcmp(p->id,id_modify) == 0){
             printf("\nEnter the new score of student with ID %s: ",id_modify);
             scanf("%d",&modify);
+            if(modify > 100 || modify < 0){
+                printf("\n\t!!The score can't be more than 100 and less than 0!!\n");
+                printf("Please enter the new score again: ");
+                scanf("%d",&modify);
+            }
             p->score = modify;
             printf("\nModified succesfully!!");
             printf("\nID: %s",p->id);
